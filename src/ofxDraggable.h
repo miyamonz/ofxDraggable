@@ -5,7 +5,6 @@
 
 class ofxDraggable{
 private:
-    int pointNum;
     ofPoint dragPoint;
     ofColor lineColor;
     ofColor innerColor;
@@ -16,13 +15,9 @@ private:
     bool    isEnableKey;
     bool    isEnableMouse;
 public:
-    
-    
     ofxDraggable();
     
     void setup();
-    
-    int getPointNum();
     
     virtual void draw(ofEventArgs & drawArgs);
     
@@ -37,39 +32,31 @@ public:
     void keyPressed(ofKeyEventArgs& keyArgs);
     void keyReleased(ofKeyEventArgs& keyArgs);
     
-    void setPosition(int i, ofPoint p);
-    void setPositions(vector<ofPoint> p);
-    ofPoint getPosition(int i);
+    void setPosition(ofPoint p);
+    ofPoint getPosition();
     
-    void setKey(int i, int k);
+    void setKey(int k);
     
-    void setLineColor(int i, ofColor c);
-    void setLineColorAll(ofColor c);
-    void setInnerColor(int i, ofColor c);
-    void setInnerColorAlpha(int i,int a);
-    void setInnerColorAll(ofColor c);
-    ofColor getInnerColor(int i);
-    ofColor getLineColor(int i);
+    void setLineColor(ofColor c);
+    void setInnerColor(ofColor c);
+    void setInnerColorAlpha(int a);
+    ofColor getInnerColor();
+    ofColor getLineColor();
     
-    void enable(int k);
-    void disable(int k);
-    void enableKey(int k);
-    void enableMouse(int k);
-    void disableKey(int k);
-    void disableMouse(int k);
-    void toggleKey(int k);
-    void toggleMouse(int k);
-    void enableAll();
-    void disableAll();
+    void enable();
+    void disable();
+    void enableKey();
+    void enableMouse();
+    void disableKey();
+    void disableMouse();
+    void toggleKey();
+    void toggleMouse();
     
-    void show(int i);
-    void hide(int i);
-    void toggleShow(int i);
-    void showAll();
-    void hideAll();
-    void toggleShowAll();
+    void show(bool);
+    void show();
+    void hide();
+    void toggleShow();
     
-    void selectOff(int i);
-    void selectOffAll();
+    void select(bool );
    
 };
