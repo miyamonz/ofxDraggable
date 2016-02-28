@@ -5,10 +5,12 @@
 ofxDraggable::ofxDraggable() {
     
     dragPoint = ofPoint(10, 10);
-    
+    radius = 40;
+    isSelected = false;
     //event
     ofRegisterMouseEvents(this);
     ofRegisterKeyEvents(this);
+
     ofAddListener(ofEvents().draw, this, &ofxDraggable::draw);
     
 }
@@ -41,10 +43,10 @@ void ofxDraggable::mousePressed(ofMouseEventArgs & mouse) {
 void ofxDraggable::mouseMoved(ofMouseEventArgs & mouse) {
 }
 void ofxDraggable::mouseDragged(ofMouseEventArgs &mouse) {
-    setPosition(mouse);
+    if(isSelected) setPosition(mouse);
 }
 void ofxDraggable::mouseReleased(ofMouseEventArgs & mouse) {
-    //isSelected = false;
+    isSelected = false;
 }
 void ofxDraggable::mouseScrolled(ofMouseEventArgs &mouse){
 }
@@ -83,6 +85,9 @@ void ofxDraggable::setLineColor(ofColor c){
 }
 void ofxDraggable::setInnerColor(ofColor c){
     innerColor = c;
+}
+void ofxDraggable::setInnerColorAlpha(int a) {
+    innerColor.a = a;
 }
 
 ofColor ofxDraggable::getInnerColor() {
@@ -136,5 +141,23 @@ void ofxDraggable::toggleShow() {
 }
 void ofxDraggable::select(bool b) {
     isSelected = b;
+}
+void ofxDraggable::addTags(ofxXmlSettings &xml){
+    xml.addTag("x");
+    xml.addTag("y");
+    xml.addTag("z");
+}
+//xml
+void ofxDraggable::varToXml(ofxXmlSettings &xml){
+    xml.setValue("x", dragPoint.x);
+    xml.setValue("y", dragPoint.y);
+    xml.setValue("z", dragPoint.z);
+}
+
+void ofxDraggable::xmlToVar(ofxXmlSettings &xml) {
+    dragPoint.x = xml.getValue("x",0);
+    dragPoint.y = xml.getValue("y",0);
+    dragPoint.z = xml.getValue("z",0);
+    
 }
 

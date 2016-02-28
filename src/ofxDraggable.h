@@ -8,13 +8,15 @@ private:
     ofPoint dragPoint;
     ofColor lineColor;
     ofColor innerColor;
+    
+public:
     float   radius;
     int     key;
     bool    isSelected;
     bool    isShow;
     bool    isEnableKey;
     bool    isEnableMouse;
-public:
+
     ofxDraggable();
     
     void setup();
@@ -58,5 +60,10 @@ public:
     void toggleShow();
     
     void select(bool );
+    
+    //xml
+    virtual void addTags(ofxXmlSettings &xml);
+    virtual void varToXml(ofxXmlSettings &xml);
+    virtual void xmlToVar(ofxXmlSettings &xml);
    
 };
