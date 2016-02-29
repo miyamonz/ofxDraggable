@@ -13,6 +13,7 @@ public:
     float   radius;
     int     key;
     bool    isSelected;
+    bool    isPressed;
     bool    isShow;
     bool    isEnableKey;
     bool    isEnableMouse;
@@ -22,6 +23,8 @@ public:
     void setup();
     
     virtual void draw(ofEventArgs & drawArgs);
+    void drawLight(ofPoint p ,ofColor c);
+    void drawLight(ofPoint p);
     
     void mousePressed(ofMouseEventArgs & mouse);
     void mouseMoved(ofMouseEventArgs & mouse);

@@ -7,6 +7,7 @@ ofxDraggable::ofxDraggable() {
     dragPoint = ofPoint(10, 10);
     radius = 40;
     isSelected = false;
+    isPressed  = false;
     //event
     ofRegisterMouseEvents(this);
     ofRegisterKeyEvents(this);
@@ -18,25 +19,31 @@ ofxDraggable::ofxDraggable() {
 void ofxDraggable::draw(ofEventArgs & drawArgs) {
     if(!isShow) return;
 
+    drawLight(dragPoint);
+    ofDrawBitmapStringHighlight(ofToString((char)key), dragPoint);
+    
+}
+void ofxDraggable::drawLight(ofPoint p, ofColor c){
     ofPushStyle();
     ofSetCircleResolution(40);
-    //line
+    //inner
     ofSetLineWidth(0.5);
     ofFill();
-    ofSetColor(innerColor);
-    ofDrawCircle(dragPoint, radius);
-    //inner
-    if(isSelected) ofSetLineWidth(4);
+    ofSetColor(c);
+    ofDrawCircle(p, radius);
+    
+    //line
+    if(isPressed) ofSetLineWidth(4);
     ofNoFill();
     ofSetColor(lineColor);
-    
-    ofDrawCircle(dragPoint, radius);
-    ofDrawBitmapStringHighlight(ofToString((char)key), dragPoint);
+    ofDrawCircle(p, radius);
     ofPopStyle();
 }
-
+void ofxDraggable::drawLight(ofPoint p) {
+    drawLight(p,innerColor);
+}
 void ofxDraggable::mousePressed(ofMouseEventArgs & mouse) {
-    if (mouse.distance(dragPoint) < radius and isEnableMouse and isSelected) {
+    if (mouse.distance(dragPoint) < radius and isEnableMouse && isPressed) {
         isSelected = true;
     }
 }
@@ -56,14 +63,14 @@ void ofxDraggable::mouseExited(ofMouseEventArgs &mouse){
 }
 void ofxDraggable::keyPressed(ofKeyEventArgs& keyArgs) {
     if(keyArgs.key == key && isEnableKey) {
-        isSelected = !isSelected;
-    }//isSelected = true;
+        isPressed = true;
+    }
 }
 void ofxDraggable::keyReleased(ofKeyEventArgs &keyArgs){
     if(keyArgs.key == key && isEnableKey) {
-        
+       isPressed = false;
     }
-    //isSelected = false;
+    
 }
 
 //point
