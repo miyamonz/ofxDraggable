@@ -1,5 +1,7 @@
 
 #include "ofxDraggable.h"
+#include "innoPocket.h"
+
 
 
 ofxDraggable::ofxDraggable() {
@@ -8,13 +10,17 @@ ofxDraggable::ofxDraggable() {
     radius = 40;
     isSelected = false;
     isPressed  = false;
+    isEnableKey   = false;
+    isEnableMouse = false;
+    setInnerColor(ofColor::white);
     //event
     ofRegisterMouseEvents(this);
     ofRegisterKeyEvents(this);
-
     ofAddListener(ofEvents().draw, this, &ofxDraggable::draw);
     
+    
 }
+
 
 void ofxDraggable::draw(ofEventArgs & drawArgs) {
     if(!isShow) return;
@@ -40,7 +46,8 @@ void ofxDraggable::drawLight(ofPoint p, ofColor c){
     ofPopStyle();
 }
 void ofxDraggable::drawLight(ofPoint p) {
-    drawLight(p,innerColor);
+    ofColor c = innerColor;
+    drawLight(p,c);
 }
 void ofxDraggable::mousePressed(ofMouseEventArgs & mouse) {
     if (mouse.distance(dragPoint) < radius and isEnableMouse && isPressed) {
@@ -138,33 +145,16 @@ void ofxDraggable::show(bool b) {
     isShow = b;
 }
 void ofxDraggable::show(){
-    isShow = true;
+    show(true);
 }
 void ofxDraggable::hide() {
-    isShow = false;
+    show(false);
 }
 void ofxDraggable::toggleShow() {
-    isShow = !isShow;
+    if(isShow) hide();
+    else show();
 }
 void ofxDraggable::select(bool b) {
     isSelected = b;
-}
-void ofxDraggable::addTags(ofxXmlSettings &xml){
-    xml.addTag("x");
-    xml.addTag("y");
-    xml.addTag("z");
-}
-//xml
-void ofxDraggable::varToXml(ofxXmlSettings &xml){
-    xml.setValue("x", dragPoint.x);
-    xml.setValue("y", dragPoint.y);
-    xml.setValue("z", dragPoint.z);
-}
-
-void ofxDraggable::xmlToVar(ofxXmlSettings &xml) {
-    dragPoint.x = xml.getValue("x",0);
-    dragPoint.y = xml.getValue("y",0);
-    dragPoint.z = xml.getValue("z",0);
-    
 }
 

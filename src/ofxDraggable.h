@@ -1,7 +1,10 @@
 #pragma once
+#include <functional>
 
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
+#include "ofxDatGui.h"
+
 
 class ofxDraggable{
 private:
@@ -10,6 +13,7 @@ private:
     ofColor innerColor;
     
 public:
+    //int index;
     float   radius;
     int     key;
     bool    isSelected;
@@ -17,7 +21,8 @@ public:
     bool    isShow;
     bool    isEnableKey;
     bool    isEnableMouse;
-
+    
+    
     ofxDraggable();
     
     void setup();
@@ -57,16 +62,10 @@ public:
     void toggleKey();
     void toggleMouse();
     
-    void show(bool);
+    virtual void show(bool);
     void show();
     void hide();
     void toggleShow();
     
     void select(bool );
-    
-    //xml
-    virtual void addTags(ofxXmlSettings &xml);
-    virtual void varToXml(ofxXmlSettings &xml);
-    virtual void xmlToVar(ofxXmlSettings &xml);
-   
 };
