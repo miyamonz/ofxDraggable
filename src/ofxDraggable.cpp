@@ -1,6 +1,6 @@
 
 #include "ofxDraggable.h"
-#include "innoPocket.h"
+//#include "innoPocket.h"
 
 
 
@@ -51,7 +51,7 @@ void ofxDraggable::drawLight(ofPoint p) {
 }
 void ofxDraggable::mousePressed(ofMouseEventArgs & mouse) {
     if (mouse.distance(dragPoint) < radius and isEnableMouse && isPressed) {
-        isSelected = true;
+        isSelected = isSelected;
     }
 }
 void ofxDraggable::mouseMoved(ofMouseEventArgs & mouse) {
@@ -70,12 +70,13 @@ void ofxDraggable::mouseExited(ofMouseEventArgs &mouse){
 }
 void ofxDraggable::keyPressed(ofKeyEventArgs& keyArgs) {
     if(keyArgs.key == key && isEnableKey) {
-        isPressed = true;
+        isPressed = !isPressed;
+//        isPressed = true;
     }
 }
 void ofxDraggable::keyReleased(ofKeyEventArgs &keyArgs){
     if(keyArgs.key == key && isEnableKey) {
-       isPressed = false;
+       //isPressed = false;
     }
     
 }
@@ -140,6 +141,9 @@ void ofxDraggable::toggleMouse(){
     isEnableMouse = !isEnableMouse;
 }
 
+void ofxDraggable::setPressed(bool b){
+    isPressed = b;
+}
 
 void ofxDraggable::show(bool b) {
     isShow = b;

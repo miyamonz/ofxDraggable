@@ -62,6 +62,7 @@ public:
     void toggleKey();
     void toggleMouse();
     
+    void setPressed(bool b);
     virtual void show(bool);
     void show();
     void hide();

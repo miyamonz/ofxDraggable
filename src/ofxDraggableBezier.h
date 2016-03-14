@@ -64,7 +64,12 @@ public:
     bool selected[4] = {false,false,false, false};
     void mousePressed(ofMouseEventArgs &mouse) {
         ofxDraggable::mousePressed(mouse);
-        for(int i=0; i<bezierPointNum; i++) if(mouse.distance(bezierPoint[i]) < radius[i] && ofxDraggable::isPressed) selected[i] = true;
+        for(int i=0; i<bezierPointNum; i++) {
+            if(mouse.distance(bezierPoint[i]) < radius[i] && ofxDraggable::isPressed) {
+//                selected[i] = !selected[i];
+                selected[i] = true;
+            }
+        }
     }
     void mouseMoved(ofMouseEventArgs &mouse) {}
     void mouseDragged(ofMouseEventArgs &mouse) {
@@ -76,7 +81,9 @@ public:
         }
     }
     void mouseReleased(ofMouseEventArgs &mouse) {
-        for(int i=0; i<bezierPointNum; i++) selected[i] = false;
+        for(int i=0; i<bezierPointNum; i++) {
+            selected[i] = false;
+        }
     }
     void mouseScrolled(ofMouseEventArgs &mouse) {}
     void mouseEntered(ofMouseEventArgs &mouse) {}
@@ -84,7 +91,7 @@ public:
     void keyPressed(ofKeyEventArgs &keyArgs) {}
     void keyReleased(ofKeyEventArgs &keyArgs) {
         if(keyArgs.key == ofxDraggable::key) {
-            ofxDraggable::isPressed = false;
+            //ofxDraggable::isPressed = false;
         }
     }
     
